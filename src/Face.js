@@ -103,25 +103,22 @@ export default class Face extends React.Component {
           width: (right - left),
           height: (bottom - top),
           borderRadius: 2,
-          background: 'blue',
-          opacity: 0.5
+          // background: 'blue',
+          opacity: 0.0
         }}></div>
+        {this.renderDot(nose, 4, {
+          background: 'red'
+        })}
         {[leftEye, rightEye].map(keypoint => (
-          this.renderDot(keypoint, 4, {
-            borderRadius: 8,
+          this.renderDot(keypoint, 3, {
             background: 'white'
           })
         ))}
         {[leftEar, rightEar].map(keypoint => (
           this.renderDot(keypoint, 2, {
-            borderRadius: 4,
-            background: 'white'
+            background: 'blue'
           })
         ))}
-        {this.renderDot(nose, 6, {
-          borderRadius: 12,
-          background: 'red'
-        })}
       </div>
     );
   }
@@ -129,15 +126,29 @@ export default class Face extends React.Component {
   renderDot(keypoint, radius, style) {
     const {x, y} = keypoint.position;
     const {part} = keypoint;
+    const glowRadius = radius*2.0;
     return (
-      <div key={part} style={{
-        position: 'absolute',
-        left: x - radius,
-        top: y - radius,
-        width: radius * 2,
-        height: radius * 2,
-        ...style
-      }}></div>
+      <div key={part}>
+        <div style={{
+          position: 'absolute',
+          left: x - glowRadius,
+          top: y - glowRadius,
+          width: glowRadius * 2,
+          height: glowRadius * 2,
+          borderRadius: glowRadius * 2,
+          opacity: 0.5,
+          ...style
+        }}></div>
+        <div style={{
+          position: 'absolute',
+          left: x - radius,
+          top: y - radius,
+          width: radius * 2,
+          height: radius * 2,
+          borderRadius: radius * 2,
+          ...style
+        }}></div>
+      </div>
     );
   }
 }
