@@ -76,9 +76,17 @@ export default class Face extends React.Component {
           alignItems: 'center'
         }}>
           <div className="Face-text">
-            <div style={{height: '2em', marginBottom: 10}}>{score ? <b>{score.toFixed(2)}</b> : <Spinner />}</div>
-            <div style={{fontSize: 20}}>overall</div>
-            <div style={{fontSize: 20}}>confidence</div>
+            {!score ? <Spinner /> : (
+              <div>
+                <div style={{marginBottom: 5}}>{<b>{score.toFixed(2)}</b>}</div>
+                <div style={{fontSize: 20, marginBottom: 20}}>confidence overall</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'nose')} nose</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEye')} left eye </div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEye')} right eye </div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEar')} left ear</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEar')} right ear</div>
+              </div>
+            )}
           </div>
           {error && <div>error! {error.toString()}</div>}
         </div>
@@ -170,4 +178,12 @@ function faceBox(keypoints) {
   const top = _.min(faceKeypoints.map(keypoint => keypoint.position.y));
   const bottom = _.max(faceKeypoints.map(keypoint => keypoint.position.y));
   return {left, right, bottom, top};
+}
+
+
+function scoreFor(keypoints, part) {
+  if (!keypoints) return null;
+  const {score} = _.find(keypoints, {part});
+  if (!score) return null;
+  return score.toFixed(2);
 }

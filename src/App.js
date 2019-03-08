@@ -13,6 +13,7 @@ import womanWearingEarrings from './searches/womanWearingEarrings.json';
 import toddlerCrying from './searches/toddlerCrying.json';
 import teenWearingHeadphones from './searches/teenWearingHeadphones.json';
 import blackWomanWearingMakeup from './searches/blackWomanWearingMakeup.json';
+import laughingOldMan from './searches/laughingOldMan.json';
 
 
 export default function App() {
@@ -45,11 +46,12 @@ function Page({net}) {
     preschoolKidWithGlasses,
     youngWhiteGirl,
     manWearingTurban,
-    toddlerCrying,
+    laughingOldMan,
+    womanWearingEarrings,
     youngBlackMan,
     highSchoolKidWithGlasses,
-    womanWearingEarrings,
-    teenWearingHeadphones,
+    toddlerCrying,
+    teenWearingHeadphones
   ];
   const set = sets[index];
   return (
@@ -72,7 +74,7 @@ function Page({net}) {
           <Search net={net} set={set} />
         </div>
         <div className="App-page-arrow App-page-right">
-          {index < sets.length && (
+          {index < sets.length - 1 && (
             <span
               className="App-link"
               onClick={() => setIndex(index + 1)}
