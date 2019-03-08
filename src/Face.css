@@ -13,3 +13,7 @@
 .Face-image {
   display: block;
 }
+
+.Face-text {
+  width: 8em;
+}

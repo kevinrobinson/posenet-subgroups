@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import Spinner from './Spinner';
 import './Face.css';
+
 
 // Show an image of a face, and run PoseNet estimate on it and draw an overlay.
 export default class Face extends React.Component {
@@ -73,8 +75,11 @@ export default class Face extends React.Component {
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          {!score && !error && <div width="50%">...</div>}
-          {score && <div width="50%">{score.toFixed(2)} overall confidence</div>}
+          <div className="Face-text">
+            <div style={{height: '2em', marginBottom: 10}}>{score ? <b>{score.toFixed(2)}</b> : <Spinner />}</div>
+            <div style={{fontSize: 20}}>overall</div>
+            <div style={{fontSize: 20}}>confidence</div>
+          </div>
           {error && <div>error! {error.toString()}</div>}
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import qs from 'query-string';
-import logo from './logo.svg';
 import _ from 'lodash';
 import * as posenet from '@tensorflow-models/posenet';
 import './App.css';
+import Spinner from './Spinner';
 import Face from './Face';
 import youngWhiteGirl from './searches/youngWhiteGirl.json';
 import preschoolKidWithGlasses from './searches/preschoolKidWithGlasses.json';
@@ -22,7 +21,7 @@ export default function App() {
       <header className="App-header">
         <PoseNet
           loadingEl={renderLoading()}
-          whenLoaded={net => renderPage(net)}
+          whenLoaded={net => <Page net={net} />}
         />
       </header>
     </div>
@@ -32,35 +31,59 @@ export default function App() {
 function renderLoading() {
   return (
     <div>
-      <div>Loading PoseNet...</div>
-      <img className="App-logo" alt="waiting..." src={logo} />
+      <div style={{margin: 20}}>Loading PoseNet...</div>
+      <Spinner />
     </div>
   );     
 }
 
-function renderPage(net) {
-  const queryString = qs.parse(window.location.search) || {};
-  const offset = queryString.offset || 0;
-  const n = queryString.n || 3;
+function Page({net}) {
+  const [index, setIndex] = useState(0);
 
-  console.log('renderPage');
+  const sets = [
+    blackWomanWearingMakeup,
+    preschoolKidWithGlasses,
+    youngWhiteGirl,
+    manWearingTurban,
+    toddlerCrying,
+    youngBlackMan,
+    highSchoolKidWithGlasses,
+    womanWearingEarrings,
+    teenWearingHeadphones,
+  ];
+  const set = sets[index];
   return (
-    <div>
+    <div className="App-page">
       <h1 style={{marginBottom: 10}}>What does PoseNet see?</h1>
       <div><small>These are some examples of what it sees on images that come up in searches.</small></div>
       <div><small>To learn more, see <a className="App-link" target="_blank" rel="noopener noreferrer" href="https://www.ajlunited.org/gender-shades">ajlunited.org/gender-shades</a></small></div>
-      {renderSearch({offset, n, net, set: youngBlackMan})}
-      {renderSearch({offset, n, net, set: youngWhiteGirl})}
-      {renderSearch({offset, n, net, set: highSchoolKidWithGlasses})}
-      {renderSearch({offset, n, net, set: preschoolKidWithGlasses})}
-      {renderSearch({offset, n, net, set: manWearingTurban})}
-      {renderSearch({offset, n, net, set: toddlerCrying})}
-      {renderSearch({offset, n, net, set: womanWearingEarrings})}
-      {renderSearch({offset, n, net, set: teenWearingHeadphones})}
-      {renderSearch({offset, n, net, set: blackWomanWearingMakeup})}
-      {/*<div style={{margin: 40}}>
-        {/*<a className="App-link" href={`/?${qs.stringify({offset: offset + n})}`} style={{margin: 40}}>See more</a>
-      </div>*/}
+      <div className="App-paging">
+        <div className="App-page-arrow App-page-left">{index > 0 && (
+          <span
+            className="App-link"
+            onClick={() => setIndex(index - 1)}
+            role="img"
+            aria-label="left">
+            ◄
+          </span>
+          )}
+        </div>
+        <div className="App-page-search">
+          <Search net={net} set={set} />
+        </div>
+        <div className="App-page-arrow App-page-right">
+          {index < sets.length && (
+            <span
+              className="App-link"
+              onClick={() => setIndex(index + 1)}
+              role="img"
+              aria-label="right">
+              ►
+            </span>
+          )}
+        </div>
+      </div>
+
       <div style={{margin: 40}}>...or try your own experiments and share!</div>
     </div>
   );
@@ -68,13 +91,23 @@ function renderPage(net) {
 
 
 // Skip images srcs that are empty strings, take only the first few
-function renderSearch({net, set, offset, n}) {
+function Search({net, set}) {
+  const batchSize = 3;
+  const [n, setN] = useState(batchSize);
   const {query, source, date, srcs} = set;
   return (
     <div key={query} className="App-search">
       <div><b>"{query}"</b></div>
       <small>from {source} on {date}</small>
-      {_.compact(srcs).slice(offset, offset + n).map((src, index) => <Face net={net} key={index} src={src} />)}
+      {_.compact(srcs).slice(0, n).map((src, index) => <Face net={net} key={index} src={src} />)}
+      <small>
+        <div
+          className="App-link"
+          style={{marginTop: 10}}
+          onClick={e => e.preventDefault() || setN(n + batchSize)}>
+          see more
+        </div>
+      </small>
     </div>
   );
 }
