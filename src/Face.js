@@ -18,16 +18,13 @@ export default class Face extends React.Component {
 
     this.estimate = this.estimate.bind(this);
     this.startEstimate = this.startEstimate.bind(this);
-  }
-
-  componentDidMount() {
-    this.startEstimate();
+    this.onImageLoaded = this.onImageLoaded.bind(this);
   }
 
   // This config could use more experimenting!
   estimate() {
     const {net} = this.props;
-    const imageScaleFactor = 0.50;
+    const imageScaleFactor = 1;
     const flipHorizontal = false;
     const outputStride = 16;
     return net.estimateSinglePose(this.imageEl, imageScaleFactor, flipHorizontal, outputStride);
@@ -38,6 +35,11 @@ export default class Face extends React.Component {
     this.estimate()
       .then(({score, keypoints}) => this.setState({score, keypoints, busy: false}))
       .catch(error => this.setState({error}));
+  }
+
+  // Delay and jitter in loading, since there's a lot at once.
+  onImageLoaded() {
+    setTimeout(this.startEstimate, 200 + (Math.random() * 1000));
   }
 
   render() {
@@ -55,6 +57,7 @@ export default class Face extends React.Component {
             src={src}
             height={200}
             alt={altText}
+            onLoad={this.onImageLoaded}
             onError={e => {
               /* Renders a 1x1 white pixel */
               e.target.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -70,6 +73,7 @@ export default class Face extends React.Component {
           justifyContent: 'center',
           alignItems: 'center'
         }}>
+          {!score && !error && <div width="50%">...</div>}
           {score && <div width="50%">{score.toFixed(2)} overall confidence</div>}
           {error && <div>error! {error.toString()}</div>}
         </div>
@@ -83,7 +87,6 @@ export default class Face extends React.Component {
     const leftEar = _.find(keypoints, { part: 'leftEar' });
     const rightEar = _.find(keypoints, { part: 'rightEar' });
     const nose = _.find(keypoints, { part: 'nose' });
-    const faceKeypoints = [leftEye, rightEye, leftEar, rightEar, nose];
     const {left, right, bottom, top} = faceBox(keypoints);
 
     return (
@@ -98,14 +101,20 @@ export default class Face extends React.Component {
           background: 'blue',
           opacity: 0.5
         }}></div>
-        {faceKeypoints.map(keypoint => (
+        {[leftEye, rightEye].map(keypoint => (
+          this.renderDot(keypoint, 4, {
+            borderRadius: 8,
+            background: 'white'
+          })
+        ))}
+        {[leftEar, rightEar].map(keypoint => (
           this.renderDot(keypoint, 2, {
             borderRadius: 4,
             background: 'white'
           })
         ))}
-        {this.renderDot(nose, 5, {
-          borderRadius: 10,
+        {this.renderDot(nose, 6, {
+          borderRadius: 12,
           background: 'red'
         })}
       </div>
