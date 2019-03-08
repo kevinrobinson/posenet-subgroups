@@ -5,9 +5,9 @@ experimenting with posenet on images of different subgroups
 ## Demo
 https://posenet-subgroups.herokuapp.com/
 
-![one](docs/1.png)
-![two](docs/2.png)
-![three](docs/3.png)
+![one](docs/one.png)
+![two](docs/two.png)
+![three](docs/three.png)
 
 
 ### New data sets
