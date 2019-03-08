@@ -1,0 +1,15 @@
+.Face {
+  display: flex;
+  overflow: hidden;
+  border: 2px solid black;
+  background: #666;
+}
+
+.Face-container {
+  position: relative;
+  transition: all 1s ease;
+}
+
+.Face-image {
+  display: block;
+}
