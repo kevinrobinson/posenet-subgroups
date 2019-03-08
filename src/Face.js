@@ -24,6 +24,7 @@ export default class Face extends React.Component {
     this.startEstimate();
   }
 
+  // This config could use more experimenting!
   estimate() {
     const {net} = this.props;
     const imageScaleFactor = 0.50;
