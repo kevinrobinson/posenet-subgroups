@@ -57,7 +57,6 @@ export default class Face extends React.Component {
             ref={el => this.imageEl = el}
             className="Face-image"
             src={src}
-            height={200}
             alt={altText}
             onLoad={this.onImageLoaded}
             onError={e => {
@@ -69,26 +68,21 @@ export default class Face extends React.Component {
             {keypoints && this.renderKeypoints(keypoints)}
           </div>
         </div>
-        <div style={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-          <div className="Face-text">
-            {!score ? <Spinner /> : (
+        <div className="Face-space">
+          {!score ? <Spinner /> : (
+            <div className="Face-text">
               <div>
                 <div style={{marginBottom: 5}}>{<b>{score.toFixed(2)}</b>}</div>
                 <div style={{fontSize: 20, marginBottom: 20}}>confidence overall</div>
-                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'nose')} nose</div>
-                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEye')} left eye </div>
-                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEye')} right eye </div>
-                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEar')} left ear</div>
-                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEar')} right ear</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'nose', 'nose')}</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEye', 'left eye')}</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEye', 'right eye')}</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'leftEar', 'left ear')}</div>
+                <div style={{fontSize: 14}}>{scoreFor(keypoints, 'rightEar', 'right ear')}</div>
               </div>
-            )}
-          </div>
-          {error && <div>error! {error.toString()}</div>}
+              {error && <div>error! {error.toString()}</div>}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -181,9 +175,14 @@ function faceBox(keypoints) {
 }
 
 
-function scoreFor(keypoints, part) {
+function scoreFor(keypoints, part, text) {
   if (!keypoints) return null;
   const {score} = _.find(keypoints, {part});
   if (!score) return null;
-  return score.toFixed(2);
+  return (
+    <span style={{opacity: score}}>
+      <span>{score.toFixed(2)}</span>
+      <span> {text}</span>
+    </span>
+  );
 }

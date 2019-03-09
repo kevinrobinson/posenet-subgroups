@@ -4,8 +4,6 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -43,4 +41,53 @@
 
 .App-page-arrow:hover {
   opacity: 1.0;
+}
+
+
+@media only screen and (max-device-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .App-learn-more {
+    flex-direction: column;
+    margin: 10px;
+    margin-top: 40px;
+    display: flex;
+  }  
+
+  .App-learn-more-panel {
+    margin-bottom: 20px;
+  }
+
+  .App-learn-more-title {
+    margin-bottom: 0;
+  }
+}
+
+.App-learn-more-panel {
+  margin: 10px;
+  font-size: 16px;
+  text-align: left;
+  flex: 1;
+}
+
+@media only screen and (min-device-width: 480px) {
+  .App-learn-more {
+    flex-direction: row;
+    margin: 20px;
+    display: flex;
+  }
+
+  .App-learn-more-panel {
+    margin-bottom: 0;
+  }
+
+  .App-learn-more-title {
+    margin-bottom: 10px;
+  }
+}
+
+.App-try-your-own {
+  justify-content: flex-end;
 }
