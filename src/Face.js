@@ -56,6 +56,7 @@ export default class Face extends React.Component {
           <img
             ref={el => this.imageEl = el}
             className="Face-image"
+            crossOrigin="Anonymous" // for image search
             src={src}
             alt={altText}
             onLoad={this.onImageLoaded}

@@ -4,6 +4,7 @@ import * as posenet from '@tensorflow-models/posenet';
 import './App.css';
 import Spinner from './Spinner';
 import Face from './Face';
+import YourOwnSearch from './YourOwnSearch';
 import youngWhiteGirl from './searches/youngWhiteGirl.json';
 import preschoolKidWithGlasses from './searches/preschoolKidWithGlasses.json';
 import highSchoolKidWithGlasses from './searches/highSchoolKidWithGlasses.json';
@@ -95,33 +96,42 @@ function Page({net}) {
         </div>
       </div>
 
-      <Search
+      <StoredSearch
         net={net}
         set={set}
         n={n}
         onMore={() => setN(n + batchSize)}
       />
 
+      <div className="App-your-own-search">
+        <div className="App-your-own-search-title">Try your own search</div>
+        <YourOwnSearch renderImage={src => <Face net={net} src={src} />} />
+      </div>
+
+      <div className="App-learn-more-section-title">Learn more</div>
       <div className="App-learn-more">
         <div className="App-learn-more-panel">
-          <div className="App-learn-more-title">More about PoseNet</div>
+          <div className="App-learn-more-title">PoseNet</div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://github.com/tensorflow/tfjs-models/tree/master/posenet">@tensorflow-models/posenet</a></div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5">Real-time Human Pose Estimation in the Browser with TensorFlow.js</a></div>
         </div>
         <div className="App-learn-more-panel">
-          <div className="App-learn-more-title">More about ethics in facial recognition systems</div>
+          <div className="App-learn-more-title">Facial recognition systems</div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://www.ajlunited.org/">Algorithmic Justice League</a></div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://www.notflawless.ai/">AI, Ain't I A Woman?</a></div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="http://gendershades.org/">Gender Shades</a></div>
-        </div>
-        <div className="App-learn-more-panel">
-          <div className="App-learn-more-title">More about building ethical AI</div>
-          <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="http://designjusticenetwork.org/network-principles/">Design Justice Network Principles</a>,</div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://www.research.ibm.com/artificial-intelligence/trusted-ai/diversity-in-faces/">Diversity in Faces Dataset</a></div>
           <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://www.safefacepledge.org/">Safe Face Pledge</a></div>
         </div>
         <div className="App-learn-more-panel">
-          <div className="App-try-your-own">...or make <a className="App-link" target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrobinson/posenet-subgroups">your own experiments</a> and share!</div>
+          <div className="App-learn-more-title">Building ethical AI</div>
+          <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://ethicalcs.org/">ethicalcs.org</a></div>
+          <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="http://designjusticenetwork.org/network-principles/">Design Justice Network Principles</a></div>
+          <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="http://www.fatml.org/resources/principles-for-accountable-algorithms">Principles for Accountable Algorithms and a Social Impact Statement for Algorithms</a></div>
+          <div className="App-learn-more-item"><a className="App-link" target="_blank" rel="noopener noreferrer" href="https://ai.google/education/responsible-ai-practices">Responsible AI practices</a></div>
+        </div>
+        <div className="App-learn-more-panel">
+          <div className="App-make-your-own">...or make <a className="App-link" target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrobinson/posenet-subgroups">your own experiments</a> and share!</div>
         </div>
       </div>
     </div>
@@ -130,8 +140,8 @@ function Page({net}) {
 
 
 // Skip images srcs that are empty strings, take only the first few
-function Search({net, set, n, onMore}) {
-  const {query, source, date, srcs} = set;
+function StoredSearch({net, set, n, onMore}) {
+  const {query, srcs} = set;
   return (
     <div key={query} className="App-search">
       {_.compact(srcs).slice(0, n).map((src, index) => <Face net={net} key={index} src={src} />)}
@@ -161,3 +171,5 @@ function PoseNet({loadingEl, whenLoaded}) {
 
   return whenLoaded(net);
 }
+
+

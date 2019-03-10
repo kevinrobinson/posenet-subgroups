@@ -1,0 +1,28 @@
+.YourOwnSearch {
+  text-align: center;
+}
+
+.YourOwnSearch-image {
+  display: inline-block;
+}
+
+.YourOwnSearch-image-source {
+  font-size: 12px;
+  color: white;
+}
+
+.YourOwnSearch-image-link {
+  color: gray;
+}
+
+.YourOwnSearch-text {
+  width: 60%;
+  padding: 10px;
+  font-size: calc(10px + 1vmin);
+  margin-right: 10px;
+}
+
+.YourOwnSearch-button {
+  padding: 10px;
+  font-size: calc(10px + 1vmin);
+}
