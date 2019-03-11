@@ -1,0 +1,1 @@
+mogrify -quality 90 -format jpg -resize 600x docs/*.png 
