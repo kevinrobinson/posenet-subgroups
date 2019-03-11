@@ -5,12 +5,12 @@ experimenting with posenet on images of different subgroups
 ## Demo
 https://posenet-subgroups.netlify.com/
 
-![laughing old man](docs/21.png)
-![black woman wearing makeup](docs/22.png)
-![preschool kid with glasses](docs/23.png)
-![baby smiling](docs/10.png)
-![joy buolamwini](docs/11.png)
-![learn more](docs/12.png)
+![laughing old man](docs/21.jpg)
+![black woman wearing makeup](docs/22.jpg)
+![preschool kid with glasses](docs/23.jpg)
+![baby smiling](docs/10.jpg)
+![joy buolamwini](docs/11.jpg)
+![learn more](docs/12.jpg)
 
 
 
