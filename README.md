@@ -5,14 +5,13 @@ experimenting with posenet on images of different subgroups
 ## Demo
 https://posenet-subgroups.netlify.com/
 
-### Browse through
-<img src="docs/a.jpg" alt="a" width="20%" height="auto" /><img src="docs/b.jpg" alt="b" width="20%" height="auto" /><img src="docs/c.jpg" alt="c" width="20%" height="auto" /><img src="docs/d.jpg" alt="d" width="20%" height="auto" />
+![laughing old man](docs/21.png)
+![black woman wearing makeup](docs/22.png)
+![preschool kid with glasses](docs/23.png)
+![baby smiling](docs/10.png)
+![joy buolamwini](docs/11.png)
+![learn more](docs/12.png)
 
-### Try your own
-<img src="docs/ira.jpg" alt="ira" width="20%" height="auto" /><img src="docs/joy.jpg" alt="joy" width="20%" height="auto" /><img src="docs/babies.jpg" alt="babies" width="20%" height="auto" /><img src="docs/puppies.jpg" alt="puppies" width="20%" height="auto" />
-
-### Learn more
-<img src="docs/learn-more.jpg" alt="learn-more" width="40%" height="auto" />
 
 
 ### New data sets
