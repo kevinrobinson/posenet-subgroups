@@ -5,9 +5,20 @@ experimenting with posenet on images of different subgroups
 ## Demo
 https://posenet-subgroups.herokuapp.com/
 
-![one](docs/one.png)
-![two](docs/two.png)
-![three](docs/three.png)
+### Browse through
+<img src="docs/a.jpg" alt="a" width="20%" height="auto" /><img src="docs/b.jpg" alt="b" width="20%" height="auto" /><img src="docs/c.jpg" alt="c" width="20%" height="auto" /><img src="docs/d.jpg" alt="d" width="20%" height="auto" />
+
+### Try your own
+<img src="docs/ira.jpg" alt="ira" width="20%" height="auto" /><img src="docs/joy.jpg" alt="joy" width="20%" height="auto" /><img src="docs/babies.jpg" alt="babies" width="20%" height="auto" /><img src="docs/puppies.jpg" alt="puppies" width="20%" height="auto" />
+
+### Learn more
+<img src="docs/label.jpg" alt="label" width="20%" height="auto" />
+<img src="docs/learn-more.jpg" alt="learn-more" width="20%" height="auto" />
+
+
+![one](docs/a.png)
+![two](docs/b.png)
+![three](docs/c.png)
 
 
 ### New data sets

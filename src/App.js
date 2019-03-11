@@ -16,6 +16,7 @@ import toddlerCrying from './searches/toddlerCrying.json';
 import teenWearingHeadphones from './searches/teenWearingHeadphones.json';
 import blackWomanWearingMakeup from './searches/blackWomanWearingMakeup.json';
 import laughingOldMan from './searches/laughingOldMan.json';
+import videochatOnScreen from './searches/videochatOnScreen.json';
 
 // different searches
 const sets = [
@@ -28,7 +29,8 @@ const sets = [
   youngBlackMan,
   highSchoolKidWithGlasses,
   toddlerCrying,
-  teenWearingHeadphones
+  teenWearingHeadphones,
+  videochatOnScreen
 ];
 
 
@@ -83,8 +85,12 @@ function Page({net, sets}) {
       <div><small>These are some examples of what it sees in images that come up from different searches.</small></div>
 
       <Paging
-        setIndex={setIndex}
         set={set}
+        index={index}
+        onChangeSet={index => {
+          setN(batchSize);
+          setIndex(index);
+        }}
       />
       <StoredSearch
         net={net}
@@ -107,7 +113,7 @@ function Page({net, sets}) {
 
 
 function Paging(props = {}) {
-  const {set, index, setIndex, batchSize, setN} = props;
+  const {set, index, onChangeSet} = props;
   const {query, source, date} = set;
 
   return (
@@ -115,10 +121,7 @@ function Paging(props = {}) {
       <div className="App-page-arrow App-page-left">
         <span
           className="App-link"
-          onClick={() => {
-            setN(batchSize);
-            setIndex(index < 0 ? sets.length - 1 : index - 1);
-          }}
+          onClick={() => onChangeSet(index <= 0 ? sets.length - 1 : index - 1)}
           role="img"
           aria-label="left">
           ◄
@@ -131,10 +134,7 @@ function Paging(props = {}) {
       <div className="App-page-arrow App-page-right">
         <span
           className="App-link"
-          onClick={() => {
-            setN(batchSize);
-            setIndex(index >= sets.length ? 0 : index + 1);
-          }}
+          onClick={() => onChangeSet(index >= sets.length - 1 ? 0 : index + 1)}
           role="img"
           aria-label="right">
           ►
