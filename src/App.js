@@ -35,19 +35,17 @@ const sets = [
 export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <PoseNet
-          loadingEl={renderLoading()}
-          whenLoaded={net => <Page net={net} sets={sets} />}
-        />
-      </header>
+      <PoseNet
+        loadingEl={renderLoading()}
+        whenLoaded={net => <Page net={net} sets={sets} />}
+      />
     </div>
   );
 }
 
 function renderLoading() {
   return (
-    <div>
+    <div className="App-loading">
       <div style={{margin: 20}}>Loading PoseNet...</div>
       <Spinner />
     </div>

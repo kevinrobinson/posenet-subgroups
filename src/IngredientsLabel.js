@@ -7,7 +7,7 @@ export default function IngredientsLabel({dataSets, architectures, preTrainedMod
     <div className="IngredientsLabel">
       <div className="IngredientsLabel-heading">
         <span className="IngredientsLabel-name">AI Ingredients Label</span>
-        <a target="_blank" rel="noopener noreferrer" href="http://datanutrition.media.mit.edu/">inspiration</a>
+        <a target="_blank" rel="noopener noreferrer" href="http://datanutrition.media.mit.edu/">Inspiration</a>
       </div>
       <div className="IngredientsLabel-section">
         <div className="IngredientsLabel-title">Data sets</div>
