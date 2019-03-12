@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Spinner';
+import Spinner from './Spinner';
 import './YourOwnSearch.css';
 
 
