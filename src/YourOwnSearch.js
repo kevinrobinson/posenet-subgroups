@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Spinner';
 import './YourOwnSearch.css';
 
 
@@ -27,6 +28,7 @@ export default function YourOwnSearch({renderImage}) {
           query={query}
           apiKey={apiKey}
           n={n}
+          loadingEl={<Spinner />}
           renderImagesJson={({json, n}) => (
             <Image
               renderImage={renderImage}
@@ -46,7 +48,7 @@ export default function YourOwnSearch({renderImage}) {
 
   
 function ImageSearch(props = {}) {
-  const {apiKey, query, n, renderImagesError, renderImagesJson} = props;
+  const {apiKey, query, n, renderImagesError, renderImagesJson, loadingEl} = props;
   const [json, setJson] = useState(null);
   const [error, setError] = useState(null);
 
@@ -60,7 +62,7 @@ function ImageSearch(props = {}) {
   if (error) return renderImagesError(error);
   if (json) return renderImagesJson({json, n});
 
-  return null;
+  return loadingEl;
 }
 
 
